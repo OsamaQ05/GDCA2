@@ -6,7 +6,6 @@ public class SpawnManagerX : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject powerupPrefab;
-    public GameObject opponentPrefab;
 
     private float spawnRangeX = 38f;
     private float spawnZMin = -5f; // set min spawn Z
@@ -50,10 +49,6 @@ public class SpawnManagerX : MonoBehaviour
             Instantiate(powerupPrefab, GenerateSpawnPosition() + powerupSpawnOffset, powerupPrefab.transform.rotation);
         }
 
-        if (waveCount==2){
-            Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);
-        }
-
         // Spawn number of enemy balls based on wave number
         for (int i = 0; i < enemiesToSpawn; i++)
         {
@@ -62,7 +57,6 @@ public class SpawnManagerX : MonoBehaviour
 
         waveCount++;
         ResetPlayerPosition(); // put player back at start
-        ResetOpponentPosition ();
 
     }
 
@@ -72,13 +66,6 @@ public class SpawnManagerX : MonoBehaviour
         player.transform.position = new Vector3(-2, 41, 25);
         player.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-
-    }
-    void ResetOpponentPosition ()
-    {
-        opponentPrefab.transform.position =  GenerateSpawnPosition();
-        opponentPrefab.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-        opponentPrefab.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
     }
 

@@ -43,11 +43,11 @@ public class SpawnManagerX : MonoBehaviour
 
     void SpawnEnemyWave(int enemiesToSpawn)
     {
-        Vector3 powerupSpawnOffset = new Vector3(0, 0, -15); // make powerups spawn at player end
+        Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16); // make powerups spawn at player end
         if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length==0)
         {
             int randomPowerup = Random.Range(0, powerupPrefabs.Length);
-            Instantiate(powerupPrefabs[randomPowerup], GenerateSpawnPosition() + powerupSpawnOffset, powerupPrefabs[randomPowerup].transform.rotation);
+            Instantiate(powerupPrefabs[randomPowerup], powerupSpawnOffset, powerupPrefabs[randomPowerup].transform.rotation);
         }
 
         // If no powerups remain, spawn a powerup

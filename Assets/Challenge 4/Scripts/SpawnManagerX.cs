@@ -5,8 +5,9 @@ using UnityEngine;
 public class SpawnManagerX : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public GameObject powerupPrefab;
+    //public GameObject powerupPrefab;
     public GameObject opponentPrefab;
+    public GameObject[] powerupPrefabs;
 
     private float spawnRangeX = 38f;
     private float spawnZMin = -5f; // set min spawn Z
@@ -43,12 +44,14 @@ public class SpawnManagerX : MonoBehaviour
     void SpawnEnemyWave(int enemiesToSpawn)
     {
         Vector3 powerupSpawnOffset = new Vector3(0, 0, -15); // make powerups spawn at player end
+        if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length==0)
+        {
+            int randomPowerup = Random.Range(0, powerupPrefabs.Length);
+            Instantiate(powerupPrefabs[randomPowerup], GenerateSpawnPosition() + powerupSpawnOffset, powerupPrefabs[randomPowerup].transform.rotation);
+        }
 
         // If no powerups remain, spawn a powerup
-        if (GameObject.FindGameObjectsWithTag("Powerup").Length == 0) // check that there are zero powerups
-        {
-            Instantiate(powerupPrefab, GenerateSpawnPosition() + powerupSpawnOffset, powerupPrefab.transform.rotation);
-        }
+        
 
         if (waveCount==2){
             Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);

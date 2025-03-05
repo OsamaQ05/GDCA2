@@ -341,8 +341,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8932280921958007952, guid: 47045ccb8f3944b9b8a55f6b07f0aefc, type: 3}
-  powerupPrefab: {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
   opponentPrefab: {fileID: 3473404036035178570, guid: b50c109b87404aa458840d80e592370d, type: 3}
+  powerupPrefabs:
+  - {fileID: 2001090928661889137, guid: 574bde7da33bfa643b4ff269086f54d6, type: 3}
+  - {fileID: 6553531463017144559, guid: b68e4bd299e8e0a42957e8395e80e21e, type: 3}
+  - {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
   enemyCount: 0
   waveCount: 1
   player: {fileID: 583048338}

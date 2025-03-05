@@ -8,6 +8,7 @@ public class SpawnManagerX : MonoBehaviour
     //public GameObject powerupPrefab;
     public GameObject opponentPrefab;
     public GameObject[] powerupPrefabs;
+    public GameObject goalkeeperPrefab;
 
     private float spawnRangeX = 38f;
     private float spawnZMin = -5f; // set min spawn Z
@@ -16,6 +17,7 @@ public class SpawnManagerX : MonoBehaviour
 
     public int enemyCount;
     public int waveCount = 1;
+    public int enemySpeed= 25;
 
 
     public GameObject player; 
@@ -56,6 +58,9 @@ public class SpawnManagerX : MonoBehaviour
         if (waveCount==2){
             Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);
         }
+         if (waveCount==3){
+            Instantiate(goalkeeperPrefab, GenerateSpawnPosition(), goalkeeperPrefab.transform.rotation);
+        }
 
         // Spawn number of enemy balls based on wave number
         for (int i = 0; i < enemiesToSpawn; i++)
@@ -64,8 +69,10 @@ public class SpawnManagerX : MonoBehaviour
         }
 
         waveCount++;
+        enemySpeed+=5;
         ResetPlayerPosition(); // put player back at start
         ResetOpponentPosition ();
+        ResetGoalkeeperPosition ();
 
     }
 
@@ -82,6 +89,13 @@ public class SpawnManagerX : MonoBehaviour
         opponentPrefab.transform.position =  GenerateSpawnPosition();
         opponentPrefab.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         opponentPrefab.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+    }
+    void ResetGoalkeeperPosition ()
+    {
+        goalkeeperPrefab.transform.position =  GenerateSpawnPosition();
+        goalkeeperPrefab.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        goalkeeperPrefab.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
     }
 

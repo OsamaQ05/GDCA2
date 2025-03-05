@@ -7,21 +7,26 @@ public class PlayerControllerX : MonoBehaviour
     private Rigidbody playerRb;
     private float speed = 500;
     private GameObject focalPoint;
-    private float turboBoost=10f; 
+    private float turboBoost=10f; //added those two
     public ParticleSystem effect;
 
-    public bool hasPowerup;
+    public bool hasPowerup; 
     public GameObject powerupIndicator;
     public int powerUpDuration = 5;
 
     private float normalStrength = 10; // how hard to hit enemy without powerup
     private float powerupStrength = 25; // how hard to hit enemy with powerup
-    ///ddd
+
+    private GameObject enemyGoal;
+    public float goalInfluenceStrength =0.5f;
+    public float goalPoweredInflunceStrength =0.85f;
+
     
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
+        enemyGoal= GameObject.Find("Enemy Goal");
     }
 
     void Update()
@@ -65,15 +70,19 @@ public class PlayerControllerX : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Rigidbody enemyRigidbody = other.gameObject.GetComponent<Rigidbody>();
-            Vector3 awayFromPlayer = - (transform.position - other.gameObject.transform.position); 
+            Vector3 awayFromPlayer = - (transform.position - other.gameObject.transform.position).normalized; 
+            Vector3 directionToGoal = (enemyGoal.transform.position - other.gameObject.transform.position).normalized;
+
            
             if (hasPowerup) // if have powerup hit enemy with powerup force
             {
-                enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
+                Vector3 shootDirection= Vector3.Lerp(awayFromPlayer,directionToGoal,goalPoweredInflunceStrength);
+                enemyRigidbody.AddForce(shootDirection * powerupStrength, ForceMode.Impulse);
             }
             else // if no powerup, hit enemy with normal strength 
             {
-                enemyRigidbody.AddForce(awayFromPlayer * normalStrength, ForceMode.Impulse);
+                Vector3 shootDirection= Vector3.Lerp(awayFromPlayer,directionToGoal,goalInfluenceStrength);
+                enemyRigidbody.AddForce(shootDirection * normalStrength, ForceMode.Impulse);
             }
 
 

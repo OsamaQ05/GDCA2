@@ -10,7 +10,7 @@ public class SpawnManagerX : MonoBehaviour
     private float spawnRangeX = 38f;
     private float spawnZMin = -5f; // set min spawn Z
     private float spawnZMax = -35f; // set max spawn Z
-    private float spawnY=-40f;
+    private float spawnY=41f;
 
     public int enemyCount;
     public int waveCount = 1;
@@ -63,7 +63,7 @@ public class SpawnManagerX : MonoBehaviour
     // Move player back to position in front of own goal
     void ResetPlayerPosition ()
     {
-        player.transform.position = new Vector3(0, 1, -7);
+        player.transform.position = new Vector3(-2, 41, 25);
         player.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 

@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8932280921958007952, guid: 47045ccb8f3944b9b8a55f6b07f0aefc, type: 3}
   powerupPrefab: {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
+  opponentPrefab: {fileID: 3473404036035178570, guid: b50c109b87404aa458840d80e592370d, type: 3}
   enemyCount: 0
   waveCount: 1
   player: {fileID: 583048338}
@@ -623,15 +624,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583048338}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.04103, y: 33.21415, z: 2.305544}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00034022063}
+  m_LocalPosition: {x: -2.01, y: 41.14, z: 25.23}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 208944974}
   - {fileID: 1170353596}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180.039, z: 0}
 --- !u!54 &583048343
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -675,6 +676,8 @@ MonoBehaviour:
   hasPowerup: 0
   powerupIndicator: {fileID: 1427939658}
   powerUpDuration: 10
+  goalInfluenceStrength: 0.5
+  goalPoweredInflunceStrength: 0.85
 --- !u!1 &583612302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,7 +2525,7 @@ GameObject:
   - component: {fileID: 1566607644}
   - component: {fileID: 1566607643}
   m_Layer: 0
-  m_Name: Enemy Goal
+  m_Name: Player Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3023,7 +3026,7 @@ GameObject:
   - component: {fileID: 2046577836}
   - component: {fileID: 2046577835}
   m_Layer: 0
-  m_Name: Player Goal
+  m_Name: Enemy Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

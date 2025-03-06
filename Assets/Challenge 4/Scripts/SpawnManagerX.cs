@@ -58,8 +58,8 @@ public class SpawnManagerX : MonoBehaviour
         if (waveCount==2){
             Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);
         }
-         if (waveCount==3){
-            Instantiate(goalkeeperPrefab, GenerateSpawnPosition(), goalkeeperPrefab.transform.rotation);
+         if (waveCount==1){
+            Instantiate(goalkeeperPrefab,new Vector3(0,41,-40), goalkeeperPrefab.transform.rotation);
         }
 
         // Spawn number of enemy balls based on wave number
@@ -67,7 +67,7 @@ public class SpawnManagerX : MonoBehaviour
         {
             Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
         }
-
+        Debug.Log("yes");
         waveCount++;
         enemySpeed+=5;
         ResetPlayerPosition(); // put player back at start
@@ -93,7 +93,7 @@ public class SpawnManagerX : MonoBehaviour
     }
     void ResetGoalkeeperPosition ()
     {
-        goalkeeperPrefab.transform.position =  GenerateSpawnPosition();
+        goalkeeperPrefab.transform.position =  new Vector3(0,41,-40);
         goalkeeperPrefab.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         goalkeeperPrefab.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 

@@ -1,13 +1,13 @@
 using UnityEngine;
 public class GoalkeeperX : MonoBehaviour
 {
-    public float speed = 25;
+    public float speed = 15;
     private Rigidbody goalkeeperRb;
     private GameObject currentTarget;
     private float maxX = 20f;
     private float minX = -20f;
-    private float maxy = -33f;
-    private float miny = -48f;
+    private float maxZ = -33f;
+    private float minZ = -48f;
 
     void Start() 
     {
@@ -38,7 +38,6 @@ public class GoalkeeperX : MonoBehaviour
 
         // Checking boundaries and correct position if needed
         Vector3 currentPos = transform.position;
-        
         if (currentPos.x > maxX)
         {
             currentPos.x = maxX;
@@ -47,13 +46,13 @@ public class GoalkeeperX : MonoBehaviour
         {
             currentPos.x = minX;
         }
-        if (currentPos.y > maxy)
+        if (currentPos.z > maxZ)
         {
-            currentPos.y = maxy;
+            currentPos.z = maxZ;
         }
-        if (currentPos.y < miny)
+        if (currentPos.z < minZ)
         {
-            currentPos.y = miny;
+            currentPos.z = minZ;
         }
 
         transform.position = currentPos;

@@ -18,18 +18,29 @@ public class SpawnManagerX : MonoBehaviour
     public int enemyCount;
     public int waveCount = 1;
     public int enemySpeed= 25;
+    private TimerX timer;
 
 
     public GameObject player; 
+
+    void Start(){
+        timer= FindObjectOfType<TimerX>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
-        if (enemyCount == 0)
+        if (!timer.running){
+            TimeUp();
+        }
+
+        else if (enemyCount == 0)
         {
+            
             SpawnEnemyWave(waveCount);
+            timer.ResetTimer();
         }
 
     }
@@ -97,6 +108,21 @@ public class SpawnManagerX : MonoBehaviour
         goalkeeperPrefab.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         goalkeeperPrefab.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
+    }
+     void TimeUp()
+    {
+        // Destroy all existing enemies
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        ResetPlayerPosition();
+        ResetOpponentPosition();
+        ResetGoalkeeperPosition();
+        SpawnEnemyWave(waveCount);
+        timer.ResetTimer();
     }
 
 }

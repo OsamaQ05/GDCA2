@@ -8,6 +8,8 @@ public class EnemyX : MonoBehaviour
     private Rigidbody enemyRb;
     private GameObject playerGoal;
     private SpawnManagerX x;
+    public static int playerScore=0;
+    public static int enemyScore=0;
 
     // Start is called before the first frame update
     void Start()
@@ -33,10 +35,13 @@ public class EnemyX : MonoBehaviour
         if (other.gameObject.name == "Enemy Goal")
         {
             Destroy(gameObject);
+            playerScore++;
         } 
         else if (other.gameObject.name == "Player Goal")
         {
             Destroy(gameObject);
+            enemyScore++;
+            
         }
 
     }

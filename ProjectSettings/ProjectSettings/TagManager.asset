@@ -7,7 +7,6 @@ TagManager:
   - Enemy
   - Powerup
   - Smash Powerup
-  - Blueteam
   layers:
   - Default
   - TransparentFX

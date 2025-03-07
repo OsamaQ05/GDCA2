@@ -5,10 +5,7 @@ using UnityEngine;
 public class SpawnManagerX : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    //public GameObject powerupPrefab;
-    public GameObject opponentPrefab;
-    public GameObject[] powerupPrefabs;
-    public GameObject goalkeeperPrefab;
+    public GameObject powerupPrefab;
 
     private float spawnRangeX = 38f;
     private float spawnZMin = -5f; // set min spawn Z
@@ -17,7 +14,6 @@ public class SpawnManagerX : MonoBehaviour
 
     public int enemyCount;
     public int waveCount = 1;
-    public int enemySpeed= 25;
 
 
     public GameObject player; 
@@ -45,21 +41,12 @@ public class SpawnManagerX : MonoBehaviour
 
     void SpawnEnemyWave(int enemiesToSpawn)
     {
-        Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16); // make powerups spawn at player end
-        if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length==0)
-        {
-            int randomPowerup = Random.Range(0, powerupPrefabs.Length);
-            Instantiate(powerupPrefabs[randomPowerup], powerupSpawnOffset, powerupPrefabs[randomPowerup].transform.rotation);
-        }
+        Vector3 powerupSpawnOffset = new Vector3(0, 0, -15); // make powerups spawn at player end
 
         // If no powerups remain, spawn a powerup
-        
-
-        if (waveCount==2){
-            Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);
-        }
-         if (waveCount==1){
-            Instantiate(goalkeeperPrefab,new Vector3(0,41,-40), goalkeeperPrefab.transform.rotation);
+        if (GameObject.FindGameObjectsWithTag("Powerup").Length == 0) // check that there are zero powerups
+        {
+            Instantiate(powerupPrefab, GenerateSpawnPosition() + powerupSpawnOffset, powerupPrefab.transform.rotation);
         }
 
         // Spawn number of enemy balls based on wave number
@@ -67,12 +54,9 @@ public class SpawnManagerX : MonoBehaviour
         {
             Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
         }
-        Debug.Log("yes");
+
         waveCount++;
-        enemySpeed+=5;
         ResetPlayerPosition(); // put player back at start
-        ResetOpponentPosition ();
-        ResetGoalkeeperPosition ();
 
     }
 
@@ -82,20 +66,6 @@ public class SpawnManagerX : MonoBehaviour
         player.transform.position = new Vector3(-2, 41, 25);
         player.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-
-    }
-    void ResetOpponentPosition ()
-    {
-        opponentPrefab.transform.position =  GenerateSpawnPosition();
-        opponentPrefab.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-        opponentPrefab.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-
-    }
-    void ResetGoalkeeperPosition ()
-    {
-        goalkeeperPrefab.transform.position =  new Vector3(0,41,-40);
-        goalkeeperPrefab.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-        goalkeeperPrefab.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9026731521184386518}
   - component: {fileID: 985784296063199365}
   m_Layer: 0
-  m_Name: Smash Powerup
+  m_Name: Powerup (3)
   m_TagString: Smash Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

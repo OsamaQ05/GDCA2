@@ -122,7 +122,7 @@ public class SpawnManagerX : MonoBehaviour
         ResetOpponentPosition();
         ResetGoalkeeperPosition();
         SpawnEnemyWave(waveCount);
-        timer.ResetTimer();
+        timer.ResetTimer();//
     }
 
 }

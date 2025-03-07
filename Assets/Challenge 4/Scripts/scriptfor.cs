@@ -2,67 +2,72 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class ScoreTrigger : MonoBehaviour
+namespace Challenge4
 {
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private int scoreIncrement = 1;
-    [SerializeField] private float restartDelay = 0.5f;
-    
-    // Add audio source reference
-    [SerializeField] private AudioClip goalSound;
-    [SerializeField] private float volume = 1.0f;
-    
-    // Static score variable to persist between triggers
-    private static int currentScore = 0;
-    
-    private void Start()
+    public class ScoreTrigger : MonoBehaviour
     {
-        // Display the current score when the game starts
-        UpdateScoreDisplay();
-    }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        // Score a goal whenever ANY object enters the trigger
-        // Increase the score
-        currentScore += scoreIncrement;
-        
-        // Update the score display
-        UpdateScoreDisplay();
-        
-        // Play the goal sound
-        PlayGoalSound();
-        
-        // Restart with delay
-        if (restartDelay <= 0)
+        [SerializeField] private TMP_Text scoreText;
+        [SerializeField] private int scoreIncrement = 1;
+        [SerializeField] private float restartDelay = 0.5f;
+
+        // Add audio source reference
+        [SerializeField] private AudioClip goalSound;
+        [SerializeField] private float volume = 1.0f;
+
+        // Static score variable to persist between triggers
+        private static int currentScore = 0;
+
+        private void Start()
         {
-            RestartGame();
+            // Display the current score when the game starts
+            UpdateScoreDisplay();
         }
-        else
+
+        private void OnTriggerEnter(Collider other)
         {
-            Invoke("RestartGame", restartDelay);
+            // Score a goal whenever ANY object enters the trigger
+            // Even if it's part of the same team (own goal)
+            // Increase the score
+            currentScore += scoreIncrement;
+
+            // Update the score display
+            UpdateScoreDisplay();
+
+            // Play the goal sound
+            PlayGoalSound();
+
+            // Restart with delay
+            if (restartDelay <= 0)
+            {
+                RestartGame();
+            }
+            else
+            {
+                Invoke("RestartGame", restartDelay);
+            }
         }
-    }
-    
-    private void UpdateScoreDisplay()
-    {
-        if (scoreText != null)
+
+        private void UpdateScoreDisplay()
         {
-            scoreText.text = "Score: " + currentScore;
+            if (scoreText != null)
+            {
+                scoreText.text = "Score: " + currentScore;
+            }
         }
-    }
-    
-    private void PlayGoalSound()
-    {
-        // Play sound if audio clip is assigned
-        if (goalSound != null)
+
+        private void PlayGoalSound()
         {
-            AudioSource.PlayClipAtPoint(goalSound, Camera.main.transform.position, volume);
+            // Play sound if audio clip is assigned
+            if (goalSound != null)
+            {
+                AudioSource.PlayClipAtPoint(goalSound, Camera.main.transform.position, volume);
+            }
         }
-    }
-    
-    private void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        private void RestartGame()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
+

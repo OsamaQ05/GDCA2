@@ -45,11 +45,11 @@ public class PlayerControllerX : MonoBehaviour
         // Jump and smash down
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            playerRb.velocity = new Vector3(playerRb.velocity.x, 10f, playerRb.velocity.z); // Jump
+            playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 10f, playerRb.linearVelocity.z); // Jump
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            playerRb.velocity = new Vector3(playerRb.velocity.x, -20f, playerRb.velocity.z); // Smash down
+            playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, -20f, playerRb.linearVelocity.z); // Smash down
         }
 
         // Keep powerup indicator following the player

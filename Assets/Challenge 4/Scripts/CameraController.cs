@@ -6,17 +6,18 @@ public class CameraController : MonoBehaviour
     public float rotationSpeed = 5f; // Speed of camera rotation
     public Vector3 offset; // The offset between the camera and player
     private float currentAngleX = 0f;
+    public bool isMenuOpen = true; // Track if the menu is open
 
-    // Start is called before the first frame update
     void Start()
     {
         // Set the initial offset between camera and player
         offset = transform.position - player.position;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
+        if (isMenuOpen) return; // Prevent camera movement if menu is open
+
         // Get the mouse input for horizontal (X) rotation
         float horizontalInput = Input.GetAxis("Mouse X");
 
@@ -32,5 +33,17 @@ public class CameraController : MonoBehaviour
 
         // Make the camera always look at the player
         transform.LookAt(player);
+    }
+
+    // Call this when closing the menu
+    public void CloseMenu()
+    {
+        isMenuOpen = false;
+    }
+
+    // Call this when opening the menu
+    public void OpenMenu()
+    {
+        isMenuOpen = true;
     }
 }

@@ -9,6 +9,10 @@ public class SpawnManagerX : MonoBehaviour
     public GameObject opponentPrefab;
     public GameObject[] powerupPrefabs;
     public GameObject goalkeeperPrefab;
+    
+    // Audio sources for win and lose sounds
+    public AudioSource winAudio;
+    public AudioSource loseAudio;
 
     private float spawnRangeX = 38f;
     private float spawnZMin = -5f; // set min spawn Z
@@ -21,9 +25,6 @@ public class SpawnManagerX : MonoBehaviour
     private TimerX timer;
     public int maxWaves=4;
     public static string UItext;
-
-
-
 
     public GameObject player; 
 
@@ -62,12 +63,20 @@ public class SpawnManagerX : MonoBehaviour
             if (EnemyX.playerScore > EnemyX.enemyScore)
             {
                 UItext = "You Win!";
-                // Winning audio 
+                // Play winning audio
+                if (winAudio != null && !winAudio.isPlaying)
+                {
+                    winAudio.Play();
+                }
             }
             else
             {
                 UItext = "You lose :(";
-                // loosing audio 
+                // Play losing audio
+                if (loseAudio != null && !loseAudio.isPlaying)
+                {
+                    loseAudio.Play();
+                }
             }
         }
         

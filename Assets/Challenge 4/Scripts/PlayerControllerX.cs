@@ -10,9 +10,9 @@ public class PlayerControllerX : MonoBehaviour
     private float turboBoost=10f; //added those two
     public ParticleSystem effect;
 
-    public bool hasPowerup; 
-    public bool hasSmashPowerup;
-    public bool hasSpeedPowerup;
+    public static bool hasPowerup; 
+    public static bool hasSmashPowerup;
+    public static bool hasSpeedPowerup;
     public GameObject powerupIndicator;
     public int powerUpDuration = 5;
 

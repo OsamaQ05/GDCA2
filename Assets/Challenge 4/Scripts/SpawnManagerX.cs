@@ -24,6 +24,7 @@ public class SpawnManagerX : MonoBehaviour
 
 
 
+
     public GameObject player; 
 
     void Start(){
@@ -32,33 +33,45 @@ public class SpawnManagerX : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (waveCount<=maxWaves)
-        { 
-            enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+{
+    if (waveCount <= maxWaves)
+    { 
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
-            if (!timer.running){
-                TimeUp();
-            }
-
-            else if (enemyCount == 0)
-            {
-                UItext= "Round "+waveCount;
+        if (!timer.running)
+        {
+            TimeUp();
+        }
+        else if (enemyCount == 0)
+        {
+           
+                UItext = "Round " + waveCount; // Show last round before ending
                 SpawnEnemyWave(waveCount);
                 timer.ResetTimer();
+        }
+    }
+    
+    else if (waveCount > maxWaves) // Check win/loss AFTER max rounds
+    {
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        if (enemyCount!=0){
+            UItext = "Final Round";
+        }
+        else if (enemyCount==0){
+            if (EnemyX.playerScore > EnemyX.enemyScore)
+            {
+                UItext = "You Win!";
+            }
+            else
+            {
+                UItext = "You lose :(";
             }
         }
-        else if (EnemyX.playerScore>EnemyX.enemyScore){
-            // show in UI win 
-            UItext= "You Wins!";
-        }
-        else if (EnemyX.playerScore<EnemyX.enemyScore){
-            // show in UI lost 
-            UItext="You lose :(";
-        }
-       
-
+        
     }
+}
+
 
     // Generate random spawn position for powerups and enemy balls
     Vector3 GenerateSpawnPosition ()
@@ -89,13 +102,24 @@ public class SpawnManagerX : MonoBehaviour
         }
 
         // Spawn number of enemy balls based on wave number
-        for (int i = 0; i < enemiesToSpawn; i++)
+        if (waveCount==4){
+            for (int i = 0; i < 3; i++)
+            {
+                Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+            }
+            
+        }
+        else {
+            for (int i = 0; i < enemiesToSpawn; i++)
         {
             Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
-        }
+        }}
+        
+     
         Debug.Log("yes");
-        waveCount++;
+        
         enemySpeed+=5;
+        waveCount++;
         ResetPlayerPosition(); // put player back at start
         ResetOpponentPosition ();
         ResetGoalkeeperPosition ();

@@ -10,7 +10,8 @@ public class EnemyX : MonoBehaviour
     private SpawnManagerX x;
     public static int playerScore=0;
     public static int enemyScore=0;
-
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +36,7 @@ public class EnemyX : MonoBehaviour
         if (other.gameObject.name == "Enemy Goal")
         {
             Destroy(gameObject);
-            playerScore++;
+            playerScore+=PlayerControllerX.scoreMultiplier;
         } 
         else if (other.gameObject.name == "Player Goal")
         {

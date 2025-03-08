@@ -11,6 +11,7 @@ public class PlayerControllerX : MonoBehaviour
     public ParticleSystem effect;
 
     public bool hasPowerup; 
+    public bool hasSmashPowerup;
     public GameObject powerupIndicator;
     public int powerUpDuration = 5;
 
@@ -20,6 +21,7 @@ public class PlayerControllerX : MonoBehaviour
     private GameObject enemyGoal;
     public float goalInfluenceStrength =0.5f;
     public float goalPoweredInflunceStrength =0.85f;
+    public static int scoreMultiplier=1;
 
     
     void Start()
@@ -54,13 +56,19 @@ public class PlayerControllerX : MonoBehaviour
             powerupIndicator.SetActive(true);
             StartCoroutine(PowerupCooldown());
         }
+        else if (  other.gameObject.CompareTag("Smash Powerup")){
+             Destroy(other.gameObject);
+            hasSmashPowerup = true;
+            powerupIndicator.SetActive(true);
+            StartCoroutine(PowerupCooldown());
+        }
     }
 
-    // Coroutine to count down powerup duration
     IEnumerator PowerupCooldown()
     {
         yield return new WaitForSeconds(powerUpDuration);
         hasPowerup = false;
+        hasSmashPowerup= false;
         powerupIndicator.SetActive(false);
     }
 
@@ -78,15 +86,28 @@ public class PlayerControllerX : MonoBehaviour
             {
                 Vector3 shootDirection= Vector3.Lerp(awayFromPlayer,directionToGoal,goalPoweredInflunceStrength);
                 enemyRigidbody.AddForce(shootDirection * powerupStrength, ForceMode.Impulse);
+                scoreMultiplier= GenerateMultiplier();
+            }
+            else if (hasSmashPowerup){
+                // code it here or make  function and call it here
+                Vector3 shootDirection= Vector3.Lerp(awayFromPlayer,directionToGoal,goalInfluenceStrength);
+                enemyRigidbody.AddForce(shootDirection * normalStrength, ForceMode.Impulse);
+                scoreMultiplier= GenerateMultiplier();
+
             }
             else // if no powerup, hit enemy with normal strength 
             {
                 Vector3 shootDirection= Vector3.Lerp(awayFromPlayer,directionToGoal,goalInfluenceStrength);
                 enemyRigidbody.AddForce(shootDirection * normalStrength, ForceMode.Impulse);
+                scoreMultiplier=1;
             }
 
 
         }
+    }
+    int GenerateMultiplier(){
+        int []array= {1,1,1,1,1,2,2,2,2,3,3};
+        return array[Random.Range(0,array.Length)];
     }
 
 

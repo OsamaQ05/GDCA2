@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Powerup
   - Smash Powerup
+  - Speed Powerup
   layers:
   - Default
   - TransparentFX

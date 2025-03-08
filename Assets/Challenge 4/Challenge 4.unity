@@ -451,6 +451,8 @@ MonoBehaviour:
   - {fileID: 6553531463017144559, guid: b68e4bd299e8e0a42957e8395e80e21e, type: 3}
   - {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
   goalkeeperPrefab: {fileID: 3950575751761227427, guid: e6e447204e02eab49b73bcb1cf2c7bc7, type: 3}
+  winAudio: {fileID: 0}
+  loseAudio: {fileID: 0}
   enemyCount: 0
   waveCount: 1
   enemySpeed: 25
@@ -3496,6 +3498,7 @@ GameObject:
   - component: {fileID: 2046577837}
   - component: {fileID: 2046577836}
   - component: {fileID: 2046577835}
+  - component: {fileID: 2046577838}
   m_Layer: 0
   m_Name: Enemy Goal
   m_TagString: Untagged
@@ -3593,6 +3596,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046577833}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2046577838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046577833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6cd63b06446d448d93755abbb8aa5b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 7c1cac97d2fc845b4bc8285cc9d6534a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -37,11 +37,13 @@ public class EnemyX : MonoBehaviour
         {
             Destroy(gameObject);
             playerScore+=PlayerControllerX.scoreMultiplier;
+            // goal audio 
         } 
         else if (other.gameObject.name == "Player Goal")
         {
             Destroy(gameObject);
             enemyScore++;
+            // enemy goal audio
             
         }
 

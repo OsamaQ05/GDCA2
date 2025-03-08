@@ -62,10 +62,12 @@ public class SpawnManagerX : MonoBehaviour
             if (EnemyX.playerScore > EnemyX.enemyScore)
             {
                 UItext = "You Win!";
+                // Winning audio 
             }
             else
             {
                 UItext = "You lose :(";
+                // loosing audio 
             }
         }
         

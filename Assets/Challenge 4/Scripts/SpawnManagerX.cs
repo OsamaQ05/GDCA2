@@ -19,6 +19,9 @@ public class SpawnManagerX : MonoBehaviour
     public int waveCount = 1;
     public int enemySpeed= 25;
     private TimerX timer;
+    public int maxWaves=4;
+    public static string UItext;
+
 
 
     public GameObject player; 
@@ -30,18 +33,30 @@ public class SpawnManagerX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if (waveCount<=maxWaves)
+        { 
+            enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
-        if (!timer.running){
-            TimeUp();
-        }
+            if (!timer.running){
+                TimeUp();
+            }
 
-        else if (enemyCount == 0)
-        {
-            
-            SpawnEnemyWave(waveCount);
-            timer.ResetTimer();
+            else if (enemyCount == 0)
+            {
+                UItext= "Round "+waveCount;
+                SpawnEnemyWave(waveCount);
+                timer.ResetTimer();
+            }
         }
+        else if (EnemyX.playerScore>EnemyX.enemyScore){
+            // show in UI win 
+            UItext= "You Wins!";
+        }
+        else if (EnemyX.playerScore<EnemyX.enemyScore){
+            // show in UI lost 
+            UItext="You lose :(";
+        }
+       
 
     }
 
@@ -112,17 +127,19 @@ public class SpawnManagerX : MonoBehaviour
      void TimeUp()
     {
         // Destroy all existing enemies
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach(GameObject enemy in enemies)
-        {
-            Destroy(enemy);
-        }
+        if (waveCount<=maxWaves){ 
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject enemy in enemies)
+            {
+                Destroy(enemy);
+            }
 
-        ResetPlayerPosition();
-        ResetOpponentPosition();
-        ResetGoalkeeperPosition();
-        SpawnEnemyWave(waveCount);
-        timer.ResetTimer();//
+            ResetPlayerPosition();
+            ResetOpponentPosition();
+            ResetGoalkeeperPosition();
+            SpawnEnemyWave(++waveCount);
+            timer.ResetTimer();}
+       
     }
 
 }

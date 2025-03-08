@@ -23,6 +23,8 @@ public class PlayerControllerX : MonoBehaviour
     public float goalPoweredInflunceStrength =0.85f;
     public static int scoreMultiplier=1;
 
+
+
     
     void Start()
     {

@@ -5,46 +5,58 @@ using UnityEngine;
 public class PlayerControllerX : MonoBehaviour
 {
     private Rigidbody playerRb;
-    private float speed = 500;
-    private GameObject focalPoint;
-    private float turboBoost=10f; //added those two
+    private float speed = 500f;
+    private float turboBoost = 10f;
     public ParticleSystem effect;
 
-    public bool hasPowerup; 
+    public bool hasPowerup;
     public GameObject powerupIndicator;
     public int powerUpDuration = 5;
 
-    private float normalStrength = 10; // how hard to hit enemy without powerup
-    private float powerupStrength = 25; // how hard to hit enemy with powerup
+    private float normalStrength = 10f;
+    private float powerupStrength = 25f;
 
     private GameObject enemyGoal;
-    public float goalInfluenceStrength =0.5f;
-    public float goalPoweredInflunceStrength =0.85f;
+    public float goalInfluenceStrength = 0.5f;
+    public float goalPoweredInflunceStrength = 0.85f;
 
-    
+    public Transform cameraTransform; // Reference to the camera
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        focalPoint = GameObject.Find("Focal Point");
-        enemyGoal= GameObject.Find("Enemy Goal");
+        enemyGoal = GameObject.Find("Enemy Goal");
+        cameraTransform = Camera.main.transform; // Get main camera's transform
     }
 
     void Update()
     {
-        // Add force to player in direction of the focal point (and camera)
-        float verticalInput = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime); 
+        // Get movement input
+        float verticalInput = Input.GetAxis("Vertical");   // W/S
+        float horizontalInput = Input.GetAxis("Horizontal"); // A/D
 
-        // Set powerup indicator position to beneath player
-        powerupIndicator.transform.position = transform.position + new Vector3(0, 0.6f, 0);
-        if (Input.GetKeyDown(KeyCode.Space)){
-            playerRb.AddForce(focalPoint.transform.forward* turboBoost,ForceMode.Impulse);
-            effect.Play();
+        // Calculate movement direction relative to the camera
+        Vector3 moveDirection = (cameraTransform.forward * verticalInput + cameraTransform.right * horizontalInput).normalized;
+        moveDirection.y = 0; // Prevent movement from affecting the Y-axis
+
+        // Apply force in the calculated direction
+        playerRb.AddForce(moveDirection * speed * Time.deltaTime, ForceMode.Force);
+
+        // Jump and smash down
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerRb.velocity = new Vector3(playerRb.velocity.x, 10f, playerRb.velocity.z); // Jump
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            playerRb.velocity = new Vector3(playerRb.velocity.x, -20f, playerRb.velocity.z); // Smash down
         }
 
+        // Keep powerup indicator following the player
+        powerupIndicator.transform.position = transform.position + new Vector3(0, 0.6f, 0);
     }
 
-    // If Player collides with powerup, activate powerup
+    // Powerup collection
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Powerup"))
@@ -56,7 +68,6 @@ public class PlayerControllerX : MonoBehaviour
         }
     }
 
-    // Coroutine to count down powerup duration
     IEnumerator PowerupCooldown()
     {
         yield return new WaitForSeconds(powerUpDuration);
@@ -64,31 +75,25 @@ public class PlayerControllerX : MonoBehaviour
         powerupIndicator.SetActive(false);
     }
 
-    // If Player collides with enemy
+    // Collision with enemies
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
             Rigidbody enemyRigidbody = other.gameObject.GetComponent<Rigidbody>();
-            Vector3 awayFromPlayer = - (transform.position - other.gameObject.transform.position).normalized; 
+            Vector3 awayFromPlayer = -(transform.position - other.gameObject.transform.position).normalized;
             Vector3 directionToGoal = (enemyGoal.transform.position - other.gameObject.transform.position).normalized;
 
-           
-            if (hasPowerup) // if have powerup hit enemy with powerup force
+            if (hasPowerup)
             {
-                Vector3 shootDirection= Vector3.Lerp(awayFromPlayer,directionToGoal,goalPoweredInflunceStrength);
+                Vector3 shootDirection = Vector3.Lerp(awayFromPlayer, directionToGoal, goalPoweredInflunceStrength);
                 enemyRigidbody.AddForce(shootDirection * powerupStrength, ForceMode.Impulse);
             }
-            else // if no powerup, hit enemy with normal strength 
+            else
             {
-                Vector3 shootDirection= Vector3.Lerp(awayFromPlayer,directionToGoal,goalInfluenceStrength);
+                Vector3 shootDirection = Vector3.Lerp(awayFromPlayer, directionToGoal, goalInfluenceStrength);
                 enemyRigidbody.AddForce(shootDirection * normalStrength, ForceMode.Impulse);
             }
-
-
         }
     }
-
-
-
 }

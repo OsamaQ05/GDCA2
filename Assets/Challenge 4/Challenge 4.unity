@@ -455,10 +455,12 @@ MonoBehaviour:
   - {fileID: 6553531463017144559, guid: b68e4bd299e8e0a42957e8395e80e21e, type: 3}
   - {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
   goalkeeperPrefab: {fileID: 3950575751761227427, guid: e6e447204e02eab49b73bcb1cf2c7bc7, type: 3}
+  mainMenuPrefab: {fileID: 303983097}
   enemyCount: 0
   waveCount: 1
   enemySpeed: 25
   player: {fileID: 583048338}
+  difficultySelector: {fileID: 1926629287}
 --- !u!1001 &258741155
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,16 +21,13 @@ public class GameStart : MonoBehaviour
         switch (selectedDifficulty)
         {
             case "Easy":
-                spawnManager.waveCount = 1;
-                spawnManager.enemySpeed = 20;
+                Debug.Log("Difficulty selected: " + selectedDifficulty);
                 break;
-            case "Medium":
-                spawnManager.waveCount = 2;
-                spawnManager.enemySpeed = 30;
+            case "Normal":
+                Debug.Log("Difficulty selected: " + selectedDifficulty);
                 break;
             case "Hard":
-                spawnManager.waveCount = 3;
-                spawnManager.enemySpeed = 40;
+                Debug.Log("Difficulty selected: " + selectedDifficulty);
                 break;
             default:
                 Debug.LogWarning("Unknown difficulty selected: " + selectedDifficulty);

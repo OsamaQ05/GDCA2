@@ -96,14 +96,15 @@ public class SpawnManagerX : MonoBehaviour
     void SpawnEnemyWave(int enemiesToSpawn)
     {
         Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16); // make powerups spawn at player end
-        if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length==0)
+        
+        // Check if there are any powerups in the scene - now including Jump Powerup
+        if (GameObject.FindGameObjectsWithTag("Powerup").Length + 
+            GameObject.FindGameObjectsWithTag("Smash Powerup").Length + 
+            GameObject.FindGameObjectsWithTag("Jump Powerup").Length == 0)
         {
             int randomPowerup = Random.Range(0, powerupPrefabs.Length);
             Instantiate(powerupPrefabs[randomPowerup], powerupSpawnOffset, powerupPrefabs[randomPowerup].transform.rotation);
         }
-
-        // If no powerups remain, spawn a powerup
-        
 
         if (waveCount==2){
             Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);
@@ -176,5 +177,4 @@ public class SpawnManagerX : MonoBehaviour
             timer.ResetTimer();}
        
     }
-
 }

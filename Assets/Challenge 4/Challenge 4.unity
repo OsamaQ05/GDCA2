@@ -448,8 +448,8 @@ MonoBehaviour:
   opponentPrefab: {fileID: 3473404036035178570, guid: b50c109b87404aa458840d80e592370d, type: 3}
   powerupPrefabs:
   - {fileID: 2001090928661889137, guid: 574bde7da33bfa643b4ff269086f54d6, type: 3}
+  - {fileID: 2001090928661889137, guid: 067a9e3ba422e43948e10eca5192195c, type: 3}
   - {fileID: 6553531463017144559, guid: b68e4bd299e8e0a42957e8395e80e21e, type: 3}
-  - {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
   goalkeeperPrefab: {fileID: 3950575751761227427, guid: e6e447204e02eab49b73bcb1cf2c7bc7, type: 3}
   winAudio: {fileID: 0}
   loseAudio: {fileID: 0}
@@ -787,8 +787,15 @@ MonoBehaviour:
   effect: {fileID: 208944976}
   hasPowerup: 0
   hasSmashPowerup: 0
+  hasJumpPowerup: 1
   powerupIndicator: {fileID: 1427939658}
   powerUpDuration: 300
+  jumpForce: 10
+  jumpEffect: {fileID: 0}
+  groundCheckDistance: 1.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
   goalInfluenceStrength: 0.5
   goalPoweredInflunceStrength: 0.85
 --- !u!1 &583612302

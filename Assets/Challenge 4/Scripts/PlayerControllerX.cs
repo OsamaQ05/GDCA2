@@ -46,73 +46,52 @@ public class PlayerControllerX : MonoBehaviour
         cameraTransform = Camera.main.transform; // Get main camera's transform
         focalPoint=GameObject.Find("Enemy Goal");
     }
-
+    
     void Update()
     {
-         // Check ground state before updating
+        // Ground checking logic
         bool wasGrounded = isGrounded;
         CheckGrounded();
         
-        // Check for landing event
         if (!wasGrounded && isGrounded && wasInAir)
         {
             OnPlayerLanding();
             wasInAir = false;
         }
         
-        // Update wasInAir state
         if (!isGrounded)
         {
             wasInAir = true;
         }
 
-        // Add force to player in direction of the focal point (and camera)
+        // Camera-based movement
         float verticalInput = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime); 
+        float horizontalInput = Input.GetAxis("Horizontal");
 
-        // Set powerup indicator position to beneath player
-        powerupIndicator.transform.position = transform.position + new Vector3(0, 0.6f, 0);
-        if (hasSpeedPowerup){
-             if (Input.GetKeyDown(KeyCode.Space)){
-            playerRb.AddForce(focalPoint.transform.forward* turboBoost,ForceMode.Impulse);
+        Vector3 moveDirection = (cameraTransform.forward * verticalInput + cameraTransform.right * horizontalInput).normalized;
+        moveDirection.y = 0;
+
+        playerRb.AddForce(moveDirection * speed * Time.deltaTime, ForceMode.Force);
+
+        // Speed powerup turbo boost
+        if (hasSpeedPowerup && Input.GetKeyDown(KeyCode.Space))
+        {
+            playerRb.AddForce(moveDirection * turboBoost, ForceMode.Impulse);
             effect.Play();
-           
         }
 
-        }
-      if (Input.GetKeyDown(KeyCode.Space)){
-            if (hasSmashPowerup && isGrounded) {
+        // Smash powerup jump
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (hasSmashPowerup && isGrounded)
+            {
                 Jump();
             }
         }
 
-        
-       
-
-        // Get movement input
-        float verticalInput = Input.GetAxis("Vertical");   // W/S
-        float horizontalInput = Input.GetAxis("Horizontal"); // A/D
-
-        // Calculate movement direction relative to the camera
-        Vector3 moveDirection = (cameraTransform.forward * verticalInput + cameraTransform.right * horizontalInput).normalized;
-        moveDirection.y = 0; // Prevent movement from affecting the Y-axis
-
-        // Apply force in the calculated direction
-        playerRb.AddForce(moveDirection * speed * Time.deltaTime, ForceMode.Force);
-
-        // Jump and smash down
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 10f, playerRb.linearVelocity.z); // Jump
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, -20f, playerRb.linearVelocity.z); // Smash down
-        }
-
-        // Keep powerup indicator following the player
         powerupIndicator.transform.position = transform.position + new Vector3(0, 0.6f, 0);
     }
+
     
     private void CheckGrounded()
     {

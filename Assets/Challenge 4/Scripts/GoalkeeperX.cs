@@ -5,7 +5,7 @@ public class GoalkeeperX : MonoBehaviour
     public float speed = 15f;
     private Rigidbody goalkeeperRb;
     private GameObject currentTarget;
-    public Vector3 centerPosition = new Vector3(0f, 30f, 40f); // Set your desired center position
+    public Vector3 centerPosition = new Vector3(0f, 31f, 40f); // Set your desired center position
     private float maxX = 20f;
     private float minX = -20f;
     private float maxZ = -33f;

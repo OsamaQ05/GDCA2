@@ -12,7 +12,6 @@ public class PlayerControllerX : MonoBehaviour
     public static bool hasPowerup; 
     public static bool hasSmashPowerup;
     public static bool hasSpeedPowerup;
-    public bool hasPowerup;
     public GameObject powerupIndicator;
     public int powerUpDuration = 5;
 
@@ -36,11 +35,6 @@ public class PlayerControllerX : MonoBehaviour
     public float shockwaveForce = 40f;
     public ParticleSystem landingEffect; 
 
-
-
-
-    public float goalInfluenceStrength = 0.5f;
-    public float goalPoweredInflunceStrength = 0.85f;
 
     public Transform cameraTransform; // Reference to the camera
 

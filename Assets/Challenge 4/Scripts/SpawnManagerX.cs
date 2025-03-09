@@ -25,6 +25,7 @@ public class SpawnManagerX : MonoBehaviour
     private TimerX timer;
     public int maxWaves=4;
     public static string UItext;
+    public GameObject powerupIndicator;
 
     public GameObject player; 
 
@@ -117,6 +118,7 @@ public class SpawnManagerX : MonoBehaviour
         PlayerControllerX.hasSmashPowerup=false;
         PlayerControllerX.hasSpeedPowerup=false;
         PlayerControllerX.hasPowerup=false;
+        powerupIndicator.SetActive(false);
         Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16); // make powerups spawn at player end
         if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length+GameObject.FindGameObjectsWithTag("Speed Powerup").Length==0)
         {

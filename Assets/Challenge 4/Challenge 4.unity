@@ -458,6 +458,7 @@ MonoBehaviour:
   waveCount: 1
   enemySpeed: 25
   maxWaves: 4
+  powerupIndicator: {fileID: 1427939658}
   player: {fileID: 583048338}
 --- !u!1001 &258741155
 PrefabInstance:
@@ -789,7 +790,16 @@ MonoBehaviour:
   powerupIndicator: {fileID: 1427939658}
   powerUpDuration: 300
   goalInfluenceStrength: 0.5
-  goalPoweredInflunceStrength: 0.85
+  goalPoweredInflunceStrength: 0.7
+  jumpForce: 15
+  jumpEffect: {fileID: 0}
+  groundCheckDistance: 1.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  shockwaveRadius: 20
+  shockwaveForce: 40
+  landingEffect: {fileID: 0}
 --- !u!1 &583612302
 GameObject:
   m_ObjectHideFlags: 0

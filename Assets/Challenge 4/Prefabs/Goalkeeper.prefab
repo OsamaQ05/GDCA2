@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1492984790059671788}
   m_Layer: 0
   m_Name: Goalkeeper
-  m_TagString: Untagged
+  m_TagString: Goalkeeper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  centerPosition: {x: 0, y: 30, z: 40}
 --- !u!54 &1492984790059671788
 Rigidbody:
   m_ObjectHideFlags: 0

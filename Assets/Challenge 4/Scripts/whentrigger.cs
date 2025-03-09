@@ -32,14 +32,15 @@ public class AudioTrigger : MonoBehaviour
     // This function is called when another collider enters this object's trigger collider
     private void OnTriggerEnter(Collider other)
     {
-        PlayAudio();
+        if (other.gameObject.CompareTag("Enemy"))
+        {PlayAudio();}
     }
     
     // This function is called when another collider makes contact with this object
-    private void OnCollisionEnter(Collision collision)
-    {
-        PlayAudio();
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+      //  PlayAudio();
+    //}
     
     // Play the audio
     private void PlayAudio()

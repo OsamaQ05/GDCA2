@@ -60,8 +60,23 @@ public class SpawnManagerX : MonoBehaviour
             UItext = "Final Round";
         }
         else if (enemyCount==0){
+            GameObject[] opponents = GameObject.FindGameObjectsWithTag("Opponent");
+            GameObject[] keepers = GameObject.FindGameObjectsWithTag("Goalkeeper");
+            // Destroy all opponents
+            foreach (GameObject opponent in opponents)
+            {
+                Destroy(opponent);
+            }
+
+            // Destroy all goalkeepers
+            foreach (GameObject keeper in keepers)
+            {
+                Destroy(keeper);
+}
+
             if (EnemyX.playerScore > EnemyX.enemyScore)
             {
+              
                 UItext = "You Win!";
                 // Play winning audio
                 if (winAudio != null && !winAudio.isPlaying)
@@ -69,7 +84,7 @@ public class SpawnManagerX : MonoBehaviour
                     winAudio.Play();
                 }
             }
-            else
+            else if (EnemyX.playerScore < EnemyX.enemyScore)
             {
                 UItext = "You lose :(";
                 // Play losing audio
@@ -77,6 +92,9 @@ public class SpawnManagerX : MonoBehaviour
                 {
                     loseAudio.Play();
                 }
+            }
+            else {
+                UItext = "Draw";
             }
         }
         
@@ -94,9 +112,13 @@ public class SpawnManagerX : MonoBehaviour
 
 
     void SpawnEnemyWave(int enemiesToSpawn)
+
     {
+        PlayerControllerX.hasSmashPowerup=false;
+        PlayerControllerX.hasSpeedPowerup=false;
+        PlayerControllerX.hasPowerup=false;
         Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16); // make powerups spawn at player end
-        if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length==0)
+        if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length+GameObject.FindGameObjectsWithTag("Speed Powerup").Length==0)
         {
             int randomPowerup = Random.Range(0, powerupPrefabs.Length);
             Instantiate(powerupPrefabs[randomPowerup], powerupSpawnOffset, powerupPrefabs[randomPowerup].transform.rotation);

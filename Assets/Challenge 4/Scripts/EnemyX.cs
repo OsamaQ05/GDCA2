@@ -37,7 +37,7 @@ public class EnemyX : MonoBehaviour
         {
             Destroy(gameObject);
             playerScore+=PlayerControllerX.scoreMultiplier;
-            playerScore++;
+           
         } 
         else if (other.gameObject.name == "Player Goal")
         {

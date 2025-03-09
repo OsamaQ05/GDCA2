@@ -47,14 +47,17 @@ public class PlayerControllerX : MonoBehaviour
              if (Input.GetKeyDown(KeyCode.Space)){
             playerRb.AddForce(focalPoint.transform.forward* turboBoost,ForceMode.Impulse);
             effect.Play();
+           
         }
 
         }
         else if (hasSmashPowerup){
+       
             // writre code heer hasooooona :) 
             // u might include thiws if (Input.GetKeyDown(KeyCode.Space)) 
             // compareTag("Enemy")
         }
+        
        
 
     }
@@ -68,18 +71,21 @@ public class PlayerControllerX : MonoBehaviour
             hasPowerup = true;
             powerupIndicator.SetActive(true);
             StartCoroutine(PowerupCooldown());
+            scoreMultiplier=GenerateMultiplier();
         }
         else if (  other.gameObject.CompareTag("Smash Powerup")){
              Destroy(other.gameObject);
             hasSmashPowerup = true;
             powerupIndicator.SetActive(true);
             StartCoroutine(PowerupCooldown());
+            scoreMultiplier=GenerateMultiplier();
         }
         else if (other.gameObject.CompareTag("Speed Powerup")){
             Destroy(other.gameObject);
             hasSpeedPowerup = true;
             powerupIndicator.SetActive(true);
             StartCoroutine(PowerupCooldown());
+            scoreMultiplier=GenerateMultiplier();
         }
     }
 

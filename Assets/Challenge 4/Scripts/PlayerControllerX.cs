@@ -34,6 +34,7 @@ public class PlayerControllerX : MonoBehaviour
     public float shockwaveRadius = 20f;
     public float shockwaveForce = 40f;
     public ParticleSystem landingEffect; 
+    GameObject focalPoint;
 
 
     public Transform cameraTransform; // Reference to the camera
@@ -43,6 +44,7 @@ public class PlayerControllerX : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         enemyGoal = GameObject.Find("Enemy Goal");
         cameraTransform = Camera.main.transform; // Get main camera's transform
+        focalPoint=GameObject.Find("Enemy Goal");
     }
 
     void Update()

@@ -38,7 +38,6 @@ public class SpawnManagerX : MonoBehaviour
 
     void Start()
     {
-        SetDifficulty(); // Initialize difficulty settings
         timer = FindObjectOfType<TimerX>();
     }
 
@@ -136,7 +135,7 @@ public class SpawnManagerX : MonoBehaviour
         PlayerControllerX.hasSpeedPowerup=false;
         PlayerControllerX.hasPowerup=false;
         powerupIndicator.SetActive(false);
-        difficultySelector.currentOption;
+        
         Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16); // make powerups spawn at player end
         if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length+GameObject.FindGameObjectsWithTag("Speed Powerup").Length==0)
         {
@@ -197,19 +196,19 @@ public class SpawnManagerX : MonoBehaviour
  
 
     // Reset opponent's position (including all enemy objects)
-    void ResetOpponentPosition()
+      void ResetOpponentPosition ()
     {
-        foreach (GameObject opponent in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            opponent.transform.position = GenerateSpawnPosition();
-            Rigidbody rb = opponent.GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
-        }
+        opponentPrefab.transform.position =  GenerateSpawnPosition();
+        opponentPrefab.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        opponentPrefab.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+ 
+    }
+    void ResetPlayerPosition ()
+    {
+        player.transform.position = new Vector3(-2, 41, 25);
+        player.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+ 
     }
 
     // Reset goalkeeper's position

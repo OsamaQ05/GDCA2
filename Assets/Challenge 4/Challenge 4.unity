@@ -454,14 +454,12 @@ MonoBehaviour:
   goalkeeperPrefab: {fileID: 3950575751761227427, guid: e6e447204e02eab49b73bcb1cf2c7bc7, type: 3}
   winAudio: {fileID: 0}
   loseAudio: {fileID: 0}
-  mainMenuPrefab: {fileID: 0}
   enemyCount: 0
   waveCount: 1
   enemySpeed: 25
   maxWaves: 4
   powerupIndicator: {fileID: 0}
   player: {fileID: 583048338}
-  difficultySelector: {fileID: 0}
 --- !u!1 &231461491
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +936,6 @@ MonoBehaviour:
   shockwaveRadius: 20
   shockwaveForce: 40
   landingEffect: {fileID: 0}
-  cameraTransform: {fileID: 0}
 --- !u!1 &583612302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1529,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f89fbd97733beab4d8e97dd1648b8685, type: 3}
   m_Resource: {fileID: 8300000, guid: f89fbd97733beab4d8e97dd1648b8685, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2886,7 +2883,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 219f5e62f47acb440823b699b2c4cd89, type: 3}
   m_Resource: {fileID: 8300000, guid: 219f5e62f47acb440823b699b2c4cd89, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

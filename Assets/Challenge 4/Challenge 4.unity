@@ -446,20 +446,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8932280921958007952, guid: 47045ccb8f3944b9b8a55f6b07f0aefc, type: 3}
-  opponentPrefab: {fileID: 3473404036035178570, guid: b50c109b87404aa458840d80e592370d, type: 3}
+  opponentPrefabHard: {fileID: 3473404036035178570, guid: b50c109b87404aa458840d80e592370d, type: 3}
+  opponentPrefabNormal: {fileID: 3595840603900860097, guid: 3ecd322f903d89a4f9ed9db8d7e7f46a, type: 3}
+  opponentPrefabEasy: {fileID: 4817319284983294556, guid: e2d2997867b24474f89cf1df06eeb70f, type: 3}
   powerupPrefabs:
   - {fileID: 2001090928661889137, guid: 574bde7da33bfa643b4ff269086f54d6, type: 3}
   - {fileID: 6553531463017144559, guid: b68e4bd299e8e0a42957e8395e80e21e, type: 3}
   - {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
   goalkeeperPrefab: {fileID: 3950575751761227427, guid: e6e447204e02eab49b73bcb1cf2c7bc7, type: 3}
-  winAudio: {fileID: 0}
-  loseAudio: {fileID: 0}
+  mainMenuPrefab: {fileID: 1802678948}
   enemyCount: 0
   waveCount: 1
   enemySpeed: 25
-  maxWaves: 4
-  powerupIndicator: {fileID: 0}
   player: {fileID: 583048338}
+  difficultySelector: {fileID: 1802678945}
 --- !u!1 &231461491
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +936,7 @@ MonoBehaviour:
   shockwaveRadius: 20
   shockwaveForce: 40
   landingEffect: {fileID: 0}
+  cameraTransform: {fileID: 0}
 --- !u!1 &583612302
 GameObject:
   m_ObjectHideFlags: 0

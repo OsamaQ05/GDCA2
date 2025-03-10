@@ -109,8 +109,12 @@ public class SpawnManagerX : MonoBehaviour
         }
 
         // Always spawn a goalkeeper
-        Instantiate(goalkeeperPrefab, new Vector3(0, 41, -40), goalkeeperPrefab.transform.rotation);
-        Debug.Log("Spawned 1 Goalkeeper");
+        if (GameObject.FindGameObjectWithTag("Goalkeeper") == null)
+        {
+            Instantiate(goalkeeperPrefab, new Vector3(0, 32, -40), goalkeeperPrefab.transform.rotation);
+            Debug.Log("Spawned 1 Goalkeeper");
+        }
+
 
         // Spawn attackers based on the difficulty
         for (int i = 0; i < numAttackers; i++)
@@ -129,10 +133,9 @@ public class SpawnManagerX : MonoBehaviour
         }
 
         // Spawn number of enemy balls based on wave number
-        for (int i = 0; i < enemiesToSpawn; i++)
+        if (GameObject.FindGameObjectWithTag("Enemy") == null)
         {
             Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
-            Debug.Log($"Spawned Enemy {i + 1}");
         }
 
         waveCount++; // Increase wave count

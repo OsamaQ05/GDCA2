@@ -891,7 +891,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583048338}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -922,6 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5036a60f22d8542ca830e4578804462b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 500
   effect: {fileID: 208944976}
   powerupIndicator: {fileID: 1427939658}
   powerUpDuration: 300
@@ -936,7 +937,7 @@ MonoBehaviour:
   shockwaveRadius: 20
   shockwaveForce: 40
   landingEffect: {fileID: 0}
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 1263412300}
 --- !u!1 &583612302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,7 +2584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f31c286a72a50f4f97478fedf9e1c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 583048342}
   rotationSpeed: 5
   offset: {x: 0, y: 0, z: 0}
   isMenuOpen: 1
@@ -3906,7 +3907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficultySelector: {fileID: 1802678945}
-  spawnManager: {fileID: 0}
+  spawnManager: {fileID: 221162289}
   mainMenuPrefab: {fileID: 1802678948}
   startButtonPrefab: {fileID: 1989357105}
 --- !u!1 &1678905390

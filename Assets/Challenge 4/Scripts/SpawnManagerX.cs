@@ -66,14 +66,14 @@ public class SpawnManagerX : MonoBehaviour
                 enemySpeed = 20; // Lower speed
                 break;
             case "Normal":
-                numAttackers = 2;
+                numAttackers = 1;
                 opponentPrefab = opponentPrefabNormal; // Assign normal opponent prefab
                 enemySpeed = 30; // Medium speed
                 break;
             case "Hard":
-                numAttackers = 3;
+                numAttackers = 1;
                 opponentPrefab = opponentPrefabHard; // Assign hard opponent prefab
-                enemySpeed = 40; // Higher speed
+                enemySpeed = 200; // Higher speed
                 break;
             default:
                 numAttackers = 1;
@@ -156,16 +156,11 @@ public class SpawnManagerX : MonoBehaviour
     // Reset opponent's position (including all enemy objects)
     void ResetOpponentPosition()
     {
-        foreach (GameObject opponent in GameObject.FindGameObjectsWithTag("Enemy"))
+        foreach (GameObject opponent in GameObject.FindGameObjectsWithTag("Opponent"))
         {
             opponent.transform.position = GenerateSpawnPosition();
             Rigidbody rb = opponent.GetComponent<Rigidbody>();
 
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
         }
     }
 
@@ -175,11 +170,7 @@ public class SpawnManagerX : MonoBehaviour
         goalkeeperPrefab.transform.position = new Vector3(0, 41, -40);
         Rigidbody rb = goalkeeperPrefab.GetComponent<Rigidbody>();
 
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
+       
     }
 }
 

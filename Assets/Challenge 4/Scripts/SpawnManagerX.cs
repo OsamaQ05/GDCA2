@@ -14,6 +14,10 @@ public class SpawnManagerX : MonoBehaviour
     public GameObject mainMenuPrefab; // Reference to the main menu
     private GameObject opponentPrefab; // This will store the selected opponent type
     public static string UItext;
+    private string dif;
+    private TimerX timer;
+    public int maxWaves=4;
+    public GameObject powerupIndicator;
 
 
     
@@ -35,6 +39,8 @@ public class SpawnManagerX : MonoBehaviour
     void Start()
     {
         SetDifficulty(); // Initialize difficulty settings
+        timer= FindObjectOfType<TimerX>();
+        
     }
 
     void Update()
@@ -45,12 +51,45 @@ public class SpawnManagerX : MonoBehaviour
             return; // Skip spawning if the main menu is still active
         }
 
+       if (waveCount <= maxWaves)
+    { 
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
-        if (enemyCount == 0)
+        if (!timer.running)
         {
-            SpawnEnemyWave(waveCount); // Spawn the next wave of enemies
+            TimeUp();
         }
+        else if (enemyCount == 0)
+        {
+           
+                UItext = "Round " + waveCount; // Show last round before ending
+                SpawnEnemyWave(waveCount);
+                timer.ResetTimer();
+        }
+    }
+    
+    else if (waveCount > maxWaves) // Check win/loss AFTER max rounds
+    {
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        if (enemyCount!=0){
+            UItext = "Final Round";
+        }
+        else if (enemyCount==0){
+            des();
+            if (EnemyX.playerScore > EnemyX.enemyScore)
+            {
+                UItext = "You Win!";
+                // Winning audio 
+            }
+            else
+            {
+                UItext = "You lose :(";
+                // loosing audsio 
+            }
+        }
+        
+    }
     }
 
     void SetDifficulty()
@@ -61,17 +100,20 @@ public class SpawnManagerX : MonoBehaviour
         switch (difficultySelector.currentOption)
         {
             case "Easy":
-                numAttackers = 1;
+                //numAttackers = 1;
+                dif="Easy";
                 opponentPrefab = opponentPrefabEasy; // Assign easy opponent prefab
                 enemySpeed = 20; // Lower speed
                 break;
             case "Normal":
-                numAttackers = 1;
+                //numAttackers = 1;
+                dif="Medium";
                 opponentPrefab = opponentPrefabNormal; // Assign normal opponent prefab
                 enemySpeed = 30; // Medium speed
                 break;
             case "Hard":
-                numAttackers = 1;
+                //numAttackers = 1;
+                dif="Hard";
                 opponentPrefab = opponentPrefabHard; // Assign hard opponent prefab
                 enemySpeed = 200; // Higher speed
                 break;
@@ -94,49 +136,42 @@ public class SpawnManagerX : MonoBehaviour
 
     void SpawnEnemyWave(int enemiesToSpawn)
     {
-        SetDifficulty(); // Ensure the difficulty is set every time a new wave spawns
-
-        // Log the wave and how many attackers and enemies will be spawned
-        Debug.Log($"Wave {waveCount}: Spawning {numAttackers} attackers, 1 goalkeeper, and {enemiesToSpawn} enemies.");
-
-        Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16);
-
-        // Check if any powerups are present, if none spawn a new one
-        if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length == 0)
+        SetDifficulty();
+    
+        PlayerControllerX.hasSmashPowerup=false;
+        PlayerControllerX.hasSpeedPowerup=false;
+        PlayerControllerX.hasPowerup=false;
+        powerupIndicator.SetActive(false);
+        Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16); // make powerups spawn at player end
+        if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length+GameObject.FindGameObjectsWithTag("Speed Powerup").Length==0)
         {
             int randomPowerup = Random.Range(0, powerupPrefabs.Length);
             Instantiate(powerupPrefabs[randomPowerup], powerupSpawnOffset, powerupPrefabs[randomPowerup].transform.rotation);
         }
 
+
         // Always spawn a goalkeeper
-        if (GameObject.FindGameObjectWithTag("Goalkeeper") == null)
-        {
-            Instantiate(goalkeeperPrefab, new Vector3(0, 32, -40), goalkeeperPrefab.transform.rotation);
-            Debug.Log("Spawned 1 Goalkeeper");
-        }
-
-
-        // Spawn attackers based on the difficulty
-        for (int i = 0; i < numAttackers; i++)
-        {
-            GameObject attacker = Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);
-            Debug.Log($"Spawned Attacker {i + 1}");
-
-            Rigidbody rb = attacker.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.mass = 1.5f; // Reduce mass for weaker hits
-                rb.linearDamping = 2f; // Increase drag to slow them down
-                rb.angularDamping = 2f; // Prevent excessive spinning
-                rb.linearVelocity *= 0.2f; // Reduce movement speed
+        if (waveCount==3){
+            if ( dif.Equals("Medium")|| dif.Equals("Hard")){
+                  Instantiate(goalkeeperPrefab,new Vector3(0,32,-40), goalkeeperPrefab.transform.rotation);
             }
         }
 
-        // Spawn number of enemy balls based on wave number
-        if (GameObject.FindGameObjectWithTag("Enemy") == null)
+        if (waveCount==2){
+             Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);}
+        
+        if (waveCount==3 && dif.Equals("Hard")){
+             Instantiate(opponentPrefab, GenerateSpawnPosition(), opponentPrefab.transform.rotation);}
+        
+
+          for (int i = 0; i < enemiesToSpawn; i++)
         {
             Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
         }
+
+
+
+      
 
         waveCount++; // Increase wave count
         enemySpeed += 5; // Increase enemy speed for the next wave
@@ -172,5 +207,40 @@ public class SpawnManagerX : MonoBehaviour
 
        
     }
+     void TimeUp()
+    {
+        // Destroy all existing enemies
+        if (waveCount<=maxWaves){ 
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject enemy in enemies)
+            {
+                Destroy(enemy);
+            }
+
+            ResetPlayerPosition();
+            ResetOpponentPosition();
+            ResetGoalkeeperPosition();
+            SpawnEnemyWave(++waveCount);
+            timer.ResetTimer();}
+       
+    }
+    public void des(){
+         GameObject[] opponents = GameObject.FindGameObjectsWithTag("Opponent");
+            GameObject[] keepers = GameObject.FindGameObjectsWithTag("Goalkeeper");
+            // Destroy all opponents
+            foreach (GameObject opponent in opponents)
+            {
+                Destroy(opponent);
+            }
+
+            // Destroy all goalkeepers
+            foreach (GameObject keeper in keepers)
+            {
+                Destroy(keeper);
 }
 
+    }
+
+}
+
+  

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ public class PlayerControllerX : MonoBehaviour
     public static bool hasSpeedPowerup;
     public GameObject powerupIndicator;
     public int powerUpDuration = 5;
-
+    public int count = 0;
     private float normalStrength = 10f;
     private float powerupStrength = 25f;
 
@@ -23,7 +23,7 @@ public class PlayerControllerX : MonoBehaviour
     public float goalPoweredInflunceStrength =0.85f;
     public static int scoreMultiplier=1;
     
-    public float jumpForce = 15f;
+    public float jumpForce = 5f;
     public ParticleSystem jumpEffect;
     private bool isGrounded;
     private bool wasInAir = false; // New: track if player was in the air
@@ -36,6 +36,11 @@ public class PlayerControllerX : MonoBehaviour
     public ParticleSystem landingEffect; 
     GameObject focalPoint;
 
+    public GameObject pauseMenuUI; // Drag Pause Menu UI here in Inspector
+    public GameObject gameManager; // Drag GameManager here in Inspector
+
+    private bool isPaused = false;
+    private PauseMenu pauseMenu;
 
     public Transform cameraTransform; // Reference to the camera
 
@@ -45,6 +50,9 @@ public class PlayerControllerX : MonoBehaviour
         enemyGoal = GameObject.Find("Enemy Goal");
         cameraTransform = Camera.main.transform; // Get main camera's transform
         focalPoint=GameObject.Find("Enemy Goal");
+        if (gameManager != null)
+            pauseMenu = gameManager.GetComponent<PauseMenu>(); // Get PauseMenu from GameManager
+
     }
     
     void Update()
@@ -62,6 +70,20 @@ public class PlayerControllerX : MonoBehaviour
         if (!isGrounded)
         {
             wasInAir = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            count++;
+
+            if (count%2 == 1){
+                pauseMenuUI.SetActive(true);
+                pauseMenu.ResumeGame(); // Call ResumeGame from PauseMenu
+            }
+            else{
+                pauseMenuUI.SetActive(false);
+                PauseGame();
+            }
         }
 
         // Camera-based movement
@@ -83,7 +105,7 @@ public class PlayerControllerX : MonoBehaviour
         // Smash powerup jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isGrounded)
+            if (isGrounded && hasSmashPowerup)
             {
                 Debug.Log("Jumping!");
                 Jump();
@@ -93,6 +115,12 @@ public class PlayerControllerX : MonoBehaviour
         powerupIndicator.transform.position = transform.position + new Vector3(0, 0.6f, 0);
     }
 
+    private void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0; // Freeze physics updates
+        pauseMenuUI.SetActive(true); // Show pause menu
+    }
     
     private void CheckGrounded()
     {

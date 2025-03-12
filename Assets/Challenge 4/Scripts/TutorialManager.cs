@@ -107,14 +107,6 @@ public class TutorialManager : MonoBehaviour
                 Debug.Log("Tutorial Step 2: Move the camera");
                 break;
             case 3:
-                tutorialText.text = "Collect the power-up";
-                Debug.Log("Tutorial Step 3: Collect the power-up");
-                break;
-            case 4:
-                tutorialText.text = "Score a goal!";
-                Debug.Log("Tutorial Step 4: Score a goal");
-                break;
-            case 5:
                 tutorialText.text = "Tutorial Complete! Good luck!";
                 Debug.Log("Tutorial Complete!");
                 StartCoroutine(HideTutorialAfterDelay(5f));

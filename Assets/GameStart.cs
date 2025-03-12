@@ -13,6 +13,7 @@ public class GameStart : MonoBehaviour
     public TMP_Text timer;
     public TMP_Text waves;
     public TMP_Text Score;
+    public GameObject pauseMenu;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class GameStart : MonoBehaviour
         timer.gameObject.SetActive(false);
         waves.gameObject.SetActive(false);
         Score.gameObject.SetActive(false);
+        pauseMenu.SetActive(false);
     }
 
     public void StartGame()

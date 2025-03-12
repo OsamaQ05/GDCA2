@@ -109,13 +109,13 @@ public class SpawnManagerX : MonoBehaviour
                 //numAttackers = 1;
                 dif="Medium";
                 opponentPrefab = opponentPrefabNormal; // Assign normal opponent prefab
-                enemySpeed = 30; // Medium speed
+                enemySpeed = 40; // Medium speed
                 break;
             case "Hard":
                 //numAttackers = 1;
                 dif="Hard";
                 opponentPrefab = opponentPrefabHard; // Assign hard opponent prefab
-                enemySpeed = 200; // Higher speed
+                enemySpeed = 50; // Higher speed
                 break;
             default:
                 numAttackers = 1;
@@ -142,6 +142,7 @@ public class SpawnManagerX : MonoBehaviour
         PlayerControllerX.hasSpeedPowerup=false;
         PlayerControllerX.hasPowerup=false;
         powerupIndicator.SetActive(false);
+        PlayerControllerX.scoreMultiplier=1;
         Vector3 powerupSpawnOffset = new Vector3(-1, 29, 16); // make powerups spawn at player end
         if (GameObject.FindGameObjectsWithTag("Powerup").Length + GameObject.FindGameObjectsWithTag("Smash Powerup").Length+GameObject.FindGameObjectsWithTag("Speed Powerup").Length==0)
         {

@@ -1,12 +1,30 @@
 using UnityEngine;
-using QuantumTek.SimpleMenu; // Import namespace
+using TMPro;
+using QuantumTek.SimpleMenu;
 
 public class GameStart : MonoBehaviour
 {
-    public SM_OptionList difficultySelector; // Reference to difficulty selector
-    public SpawnManagerX spawnManager; // Reference to the spawn manager
-    public GameObject mainMenuPrefab; // Reference to the Simple Main Menu prefab
-    public GameObject startButtonPrefab; // Reference to the Start Button prefab
+    public SM_OptionList difficultySelector;
+    public SpawnManagerX spawnManager;
+    public GameObject mainMenuPrefab;
+    public GameObject startButtonPrefab;
+    public GameObject background;
+
+    public TMP_Text timer;
+    public TMP_Text waves;
+    public TMP_Text Score;
+
+    private void Start()
+    {
+        closeAll(); // Automatically hides elements when the game starts
+    }
+
+    public void closeAll()
+    {
+        timer.gameObject.SetActive(false);
+        waves.gameObject.SetActive(false);
+        Score.gameObject.SetActive(false);
+    }
 
     public void StartGame()
     {
@@ -21,11 +39,7 @@ public class GameStart : MonoBehaviour
         switch (selectedDifficulty)
         {
             case "Easy":
-                Debug.Log("Difficulty selected: " + selectedDifficulty);
-                break;
             case "Normal":
-                Debug.Log("Difficulty selected: " + selectedDifficulty);
-                break;
             case "Hard":
                 Debug.Log("Difficulty selected: " + selectedDifficulty);
                 break;
@@ -36,20 +50,25 @@ public class GameStart : MonoBehaviour
 
         Debug.Log("Game started with difficulty: " + selectedDifficulty);
 
-        // Hide the Simple Main Menu prefab
         if (mainMenuPrefab != null)
         {
-            mainMenuPrefab.SetActive(false); // Disables the Main Menu
+            mainMenuPrefab.SetActive(false);
+            background.SetActive(false);
+            timer.gameObject.SetActive(true);
+            waves.gameObject.SetActive(true);
+            Score.gameObject.SetActive(true);
         }
         else
         {
             Debug.LogError("Main Menu prefab is missing in GameStart script!");
         }
 
-        // Hide the Start Button prefab
         if (startButtonPrefab != null)
         {
-            startButtonPrefab.SetActive(false); // Disables the Start Button
+            startButtonPrefab.SetActive(false);
+            background.SetActive(false);
+            timer.gameObject.SetActive(true);
+            waves.gameObject.SetActive(true);
         }
         else
         {

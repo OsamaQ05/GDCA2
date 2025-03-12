@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1585639697054233706, guid: b50c109b87404aa458840d80e592370d, type: 3}
       propertyPath: speed
-      value: 25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3314018224287230045, guid: b50c109b87404aa458840d80e592370d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62,7 +62,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7bea61789755a11478c011837c393b08, type: 2}
     - target: {fileID: 7970502764442719999, guid: b50c109b87404aa458840d80e592370d, type: 3}
       propertyPath: m_Mass
-      value: 0.8
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970502764442719999, guid: b50c109b87404aa458840d80e592370d, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

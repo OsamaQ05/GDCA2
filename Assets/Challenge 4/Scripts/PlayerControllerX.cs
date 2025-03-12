@@ -83,8 +83,9 @@ public class PlayerControllerX : MonoBehaviour
         // Smash powerup jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (hasSmashPowerup && isGrounded)
+            if (isGrounded)
             {
+                Debug.Log("Jumping!");
                 Jump();
             }
         }
@@ -112,6 +113,7 @@ public class PlayerControllerX : MonoBehaviour
     private void Jump()
     {
         playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 0, playerRb.linearVelocity.z);
+
         playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         
         if (jumpEffect != null) {

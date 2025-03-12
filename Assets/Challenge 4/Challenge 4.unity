@@ -455,6 +455,8 @@ MonoBehaviour:
   - {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
   goalkeeperPrefab: {fileID: 3950575751761227427, guid: e6e447204e02eab49b73bcb1cf2c7bc7, type: 3}
   mainMenuPrefab: {fileID: 1802678948}
+  maxWaves: 4
+  powerupIndicator: {fileID: 1427939658}
   enemyCount: 0
   waveCount: 1
   enemySpeed: 25

@@ -224,6 +224,7 @@ public class SpawnManagerX : MonoBehaviour
             timer.ResetTimer();}
        
     }
+    
     public void des(){
          GameObject[] opponents = GameObject.FindGameObjectsWithTag("Opponent");
             GameObject[] keepers = GameObject.FindGameObjectsWithTag("Goalkeeper");
@@ -237,7 +238,7 @@ public class SpawnManagerX : MonoBehaviour
             foreach (GameObject keeper in keepers)
             {
                 Destroy(keeper);
-}
+         }   
 
     }
 

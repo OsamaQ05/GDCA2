@@ -216,6 +216,7 @@ public class PlayerControllerX : MonoBehaviour
         hasPowerup = false;
         hasSmashPowerup= false;
         powerupIndicator.SetActive(false);
+        scoreMultiplier=1;
     }
 
     // Collision with enemies
@@ -231,14 +232,12 @@ public class PlayerControllerX : MonoBehaviour
             {
                 Vector3 shootDirection = Vector3.Lerp(awayFromPlayer, directionToGoal, goalPoweredInflunceStrength);
                 enemyRigidbody.AddForce(shootDirection * powerupStrength, ForceMode.Impulse);
-                scoreMultiplier= GenerateMultiplier();
             }
 
             else // if no powerup, hit enemy with normal strength 
             {
                 Vector3 shootDirection = Vector3.Lerp(awayFromPlayer, directionToGoal, goalInfluenceStrength);
                 enemyRigidbody.AddForce(shootDirection * normalStrength, ForceMode.Impulse);
-                scoreMultiplier=1;
             }
         }
     }

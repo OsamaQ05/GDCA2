@@ -1057,14 +1057,14 @@ MonoBehaviour:
   goalInfluenceStrength: 0.5
   goalPoweredInflunceStrength: 0.7
   jumpForce: 15
-  jumpEffect: {fileID: 0}
+  jumpEffect: {fileID: 1104711846}
   groundCheckDistance: 1.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   shockwaveRadius: 20
   shockwaveForce: 40
-  landingEffect: {fileID: 0}
+  landingEffect: {fileID: 208944976}
   cameraTransform: {fileID: 1263412300}
 --- !u!1 &583612302
 GameObject:
@@ -2339,6 +2339,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 799882880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1104711846 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4392870381175910774, guid: 6562db3a873684fa9b7da3aef8329d82, type: 3}
+  m_PrefabInstance: {fileID: 258741155}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1105659937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,7 +2481,7 @@ Transform:
   m_GameObject: {fileID: 1198748360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7084138, z: 0, w: 0.70579743}
-  m_LocalPosition: {x: -0.007376566, y: 0.36389, z: -0.029760897}
+  m_LocalPosition: {x: -0.007376566, y: 0.3639, z: -0.029760897}
   m_LocalScale: {x: 0.15213269, y: 0.012758117, z: 0.114429645}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2492,7 +2497,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4036,6 +4041,15 @@ MonoBehaviour:
   spawnManager: {fileID: 221162289}
   mainMenuPrefab: {fileID: 1802678948}
   startButtonPrefab: {fileID: 1989357105}
+  background: {fileID: 1715854776}
+  timer: {fileID: 1628968128}
+  waves: {fileID: 1303092446}
+  Score: {fileID: 718255602}
+--- !u!1 &1715854776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1376385379328462015, guid: 016405bf1e2fe44af9a829052f7fc802, type: 3}
+  m_PrefabInstance: {fileID: 32348813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1802678944
 PrefabInstance:
   m_ObjectHideFlags: 0
